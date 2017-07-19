@@ -86,7 +86,23 @@ The following variables may be change during the make process:
 
 ## Running on CoreOS
 
-First, make sure you have `make` in your toolbox.
+Setup your data directory (assuming user `core`):
+
+```bash
+git clone https://github.com/alexmilowski/allegrograph-docker.git
+toolbox make -f /media/root/home/core/allegrograph-docker/Makefile create-data-local HOME=/media/root
+docker create -m 1g -p 10035:10035 --shm-size 1g --name agraph -v /data:/data franzinc/agraph:latest
+```
+
+You'll want to adjust the database memory, ports, and name and other parameters to the `docker create` command as necessary.
+
+Then edit ~/data/etc/agraph.cfg as you need and start your database:
+
+```bash
+docker start agraph
+```
+
+If you don't have `make` in your toolbox, try this for ubuntu/toolbox:
 
 In your `~/.tooboxrc`
 
@@ -100,18 +116,4 @@ Then install `make` by:
 ```bash
 toolbox apt-get update
 toolbox apt-get install build-essential
-```
-
-Setup your data directory (assuming user `core`):
-
-```bash
-git clone https://github.com/alexmilowski/allegrograph-docker.git
-toolbox make -f /media/root/home/core/allegrograph-docker/Makefile create-data-local HOME=/media/root
-docker create -m 1g -p 10035:10035 --shm-size 1g --name agraph -v /data:/data franzinc/agraph:latest
-```
-
-Then edit ~/data/etc/agraph.cfg as you need and start your database:
-
-```bash
-docker start agraph
 ```
