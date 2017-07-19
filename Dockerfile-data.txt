@@ -1,0 +1,17 @@
+FROM centos:centos6
+
+RUN groupadd agraph \
+    && useradd -d /data -g agraph agraph
+
+VOLUME /data
+
+RUN mkdir -p /data/etc \
+    && mkdir -p /data/root \
+    && mkdir -p /data/dynamic \
+    && mkdir -p /data/settings \
+    && mkdir -p /data/log \
+    && mkdir -p /data/var
+
+COPY agraph.cfg /data/etc/
+
+RUN chown -R agraph:agraph /data
