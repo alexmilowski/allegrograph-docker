@@ -9,6 +9,8 @@ DATA_NAME=$(NAME)_data
 PORT=10035
 SSL_PORT=10036
 
+ROOT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+
 all:
 	@echo "Run this once to create the image with your configuration:"
 	@echo ""
@@ -44,14 +46,14 @@ create-data-local:
 	mkdir -p $(HOME)/data/log
 	mkdir -p $(HOME)/data/var
 	@echo "Generating $(HOME)/data/etc/agraph.cfg"
-	@sed "s/\$$ADMIN_USER/$(ADMIN_USER)/g" agraph.in | sed "s/\$$ADMIN_PASSWORD/$(ADMIN_PASSWORD)/g" | sed "s/\$$PORT/$(PORT)/g" | sed "s/\$$SSL_PORT/$(SSL_PORT)/g" > $(HOME)/data/etc/agraph.cfg
+	@sed "s/\$$ADMIN_USER/$(ADMIN_USER)/g" $(ROOT_DIR)/agraph.in | sed "s/\$$ADMIN_PASSWORD/$(ADMIN_PASSWORD)/g" | sed "s/\$$PORT/$(PORT)/g" | sed "s/\$$SSL_PORT/$(SSL_PORT)/g" > $(HOME)/data/etc/agraph.cfg
 
 create-local:
 	docker create -m $(MEMSIZE) -p $(PORT):$(PORT) --shm-size $(SHMSIZE) --name $(NAME) -v $(HOME)/data:/data $(IMAGE)
 
 create-data-image:
 	@echo "Generating agraph.cfg"
-	@sed "s/\$$ADMIN_USER/$(ADMIN_USER)/g" agraph.in | sed "s/\$$ADMIN_PASSWORD/$(ADMIN_PASSWORD)/g" | sed "s/\$$PORT/$(PORT)/g" | sed "s/\$$SSL_PORT/$(SSL_PORT)/g" > agraph.cfg
+	@sed "s/\$$ADMIN_USER/$(ADMIN_USER)/g" $(ROOT_DIR)/agraph.in | sed "s/\$$ADMIN_PASSWORD/$(ADMIN_PASSWORD)/g" | sed "s/\$$PORT/$(PORT)/g" | sed "s/\$$SSL_PORT/$(SSL_PORT)/g" > agraph.cfg
 	docker build -f Dockerfile-data.txt -t $(DATA_IMAGE) .
 	@rm -f agraph.cfg
 
