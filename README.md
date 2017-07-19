@@ -104,7 +104,7 @@ docker start agraph
 
 If you don't have `make` in your toolbox, try this for ubuntu/toolbox:
 
-In your `~/.tooboxrc`
+In your `~/.tooboxrc`:
 
 ```
 TOOLBOX_DOCKER_IMAGE=ubuntu-debootstrap
