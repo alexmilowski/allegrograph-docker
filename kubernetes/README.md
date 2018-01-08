@@ -85,8 +85,9 @@ You should now be able to access your deployment of AllegroGraph at [http://loca
 
 The file `agraph-service.yaml` contains an example of a service deployment. There are a number of changes you may want to make:
 
- * if you just want an internal service only available within the cluster, either delete 'type: LoadBalancer' or change it to ClusterIP.
- * if you want an external IP, you should enter an external IP of one of your Kubernetes nodes in the `externalIPs` array.
+ * If you just want an internal service only available within the cluster, either delete 'type: LoadBalancer' or change it to ClusterIP.
+
+ * If you want an external IP, you should enter an external IP of one of your Kubernetes nodes in the `externalIPs` array.
 
    You can use the this to find the IP addresses of your nodes:
    ```
