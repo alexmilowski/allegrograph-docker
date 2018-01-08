@@ -26,23 +26,23 @@ The following procedure can be used to deploy a single node AllegroGraph instanc
  1. You must first create a persistent volume to store your data. There are many ways this can be done and it depends on
     how you choose to run your Kubernetes cluster. For example, a simple volume via NFS might be (in `volume.yaml`):
     ```
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: agraph-volume-1-nfs
-  labels:
-    storage-backend: nfs
-    content: agraph-volume-1
-spec:
-  capacity:
-    storage: 1024Gi
-  accessModes:
-    - ReadWriteMany
-  persistentVolumeReclaimPolicy: Retain
-  nfs:
-    server: ...
-    path: "..."
-    readOnly: false
+    apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      name: agraph-volume-1-nfs
+      labels:
+        storage-backend: nfs
+        content: agraph-volume-1
+    spec:
+      capacity:
+        storage: 1024Gi
+      accessModes:
+        - ReadWriteMany
+      persistentVolumeReclaimPolicy: Retain
+      nfs:
+        server: ...
+        path: "..."
+        readOnly: false
     ```
 
     and then:
