@@ -30,7 +30,7 @@ if [ ! -f /data/settings/user/admin ]; then
    cp /var/local/agraph/admin /data/settings/user/
    MODIFIED=true
 fi
-if ["$MODIFIED" = true]; then
+if [ $MODIFIED = true ]; then
    chown -R agraph:agraph /data
 fi
 
