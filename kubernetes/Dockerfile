@@ -1,5 +1,4 @@
 FROM ubuntu:latest
-#FROM centos:centos6
 
 MAINTAINER alex@milowski.com
 

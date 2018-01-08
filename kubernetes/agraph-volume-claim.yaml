@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: agraph-storage-1
+spec:
+  selector:
+    matchLabels:
+      storage-backend: nfs
+      content: agraph-volume-1
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 1024Gi

@@ -1,8 +1,14 @@
 # AllegroGraph on Docker
 
-This project helps you configure and run AllegroGraph via Docker.  The makefile will
+This project helps you configure and run the graph database [AllegroGraph](https://allegrograph.com) via [Docker](https://www.docker.com).  The makefile will
 build containers in which the data and database run.  The data is stored separately
 in another container or can be stored in a local directory.
+
+## Running in Kubernetes
+
+AllegroGraph can be run in [Kubernetes](https://kubernetes.io) with a few adjustments to the standard docker image to allow
+the configuration of persistent storage.  The setup and docker build is in the [/kubernetes](/kubernetes/)
+folder.
 
 ## Running completely in containers
 
